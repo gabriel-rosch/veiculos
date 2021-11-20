@@ -92,6 +92,11 @@ function App() {
                         X
                       </button>
                     </td>
+                    <td>
+                      <button  onClick={() => {excluirVeiculo(veiculo)}}>
+                        Alterar
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
