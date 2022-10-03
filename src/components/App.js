@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./App.css";
+import { FcEmptyTrash, } from 'react-icons/fc';
+
+
 
 function App() {
   const [modeloPesquisa, setModeloPesquisa] = useState("");
@@ -38,7 +41,6 @@ function App() {
           setAnoPesquisa(v.ano);
         }
       })
-
     }
   }
 
@@ -47,6 +49,35 @@ function App() {
     setModelo("");
     setMarca("");
     setAno("");
+  }
+
+  function excluir(placa) {
+
+    veiculos.forEach((v, index)=>{
+      if(v.placa == placa) {
+        veiculos.splice(index,1)
+        console.log(veiculos);
+      }
+    })
+
+    setVeiculos([...veiculos]);
+  }
+
+
+
+  function filtrarVeiculo(placa) {
+    
+    let veiculo = null;
+
+    veiculos.forEach((v)=> {
+      if(veiculo.placa == placa) {
+        veiculo = v
+      }
+    }) 
+    console.log(placa);
+    console.log(veiculo); 
+    return veiculo;
+
   }
 
   return (
@@ -108,6 +139,7 @@ function App() {
             <th>Modelo</th>
             <th>Marca</th>
             <th>Ano</th>
+            <th>Ação</th>
           </tr>
           {veiculos.map((veiculo) => {
             return (
@@ -116,6 +148,11 @@ function App() {
                 <td>{veiculo.modelo}</td>
                 <td>{veiculo.marca}</td>
                 <td>{veiculo.ano}</td>
+                <td>
+                  <button onClick={()=>{excluir(veiculo.placa)}}>
+                    <FcEmptyTrash />
+                  </button>
+                </td>
               </tr>
             );
           })}
